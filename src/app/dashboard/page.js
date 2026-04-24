@@ -1,41 +1,33 @@
 "use client";
 
-import ProtectedRoute from "../../components/common/ProtectedRoute";
-import { useAuth } from "../../context/AuthContext";
+import AppLayout from "../../components/common/AppLayout";
 
 export default function DashboardPage() {
-  const { currentUser, logoutUser } = useAuth();
-
-  const handleLogout = async () => {
-    await logoutUser();
-  };
-
   return (
-    <ProtectedRoute>
-      <main className="min-h-screen bg-gray-100 p-6">
-        <div className="max-w-5xl mx-auto bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-3xl font-bold">Dashboard</h1>
-              <p className="text-gray-600">
-                Welcome, {currentUser?.displayName || currentUser?.email}
-              </p>
-            </div>
-
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Logout
-            </button>
-          </div>
-
-          <p className="text-gray-700">
-            Authentication setup is working. Next we will add categories, transactions,
-            budgets and dashboard data.
-          </p>
+    <AppLayout title="Dashboard">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+        <div className="bg-white p-5 rounded-xl shadow-sm border">
+          <p className="text-sm text-gray-500">Total Income</p>
+          <h3 className="text-2xl font-bold text-green-600 mt-2">Rs. 0</h3>
         </div>
-      </main>
-    </ProtectedRoute>
+
+        <div className="bg-white p-5 rounded-xl shadow-sm border">
+          <p className="text-sm text-gray-500">Total Expenses</p>
+          <h3 className="text-2xl font-bold text-red-600 mt-2">Rs. 0</h3>
+        </div>
+
+        <div className="bg-white p-5 rounded-xl shadow-sm border">
+          <p className="text-sm text-gray-500">Current Balance</p>
+          <h3 className="text-2xl font-bold text-blue-600 mt-2">Rs. 0</h3>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl border shadow-sm p-6">
+        <h3 className="text-lg font-semibold mb-2">Welcome</h3>
+        <p className="text-gray-600">
+          Dashboard data will appear here after adding transactions and budgets.
+        </p>
+      </div>
+    </AppLayout>
   );
 }
