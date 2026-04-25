@@ -23,7 +23,7 @@ api.interceptors.request.use(async (config) => {
   const user = await waitForCurrentUser();
 
   if (user) {
-    const token = await user.getIdToken();
+    const token = await user.getIdToken(true);
     config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -36,7 +36,11 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
 
       if (auth.currentUser) {

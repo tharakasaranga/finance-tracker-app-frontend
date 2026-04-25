@@ -111,7 +111,9 @@ export default function TransactionsPage() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = confirm("Are you sure you want to delete this transaction?");
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this transaction?",
+    );
 
     if (!confirmDelete) return;
 

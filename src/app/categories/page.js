@@ -70,7 +70,9 @@ export default function CategoriesPage() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = confirm("Are you sure you want to delete this category?");
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this category?",
+    );
 
     if (!confirmDelete) return;
 

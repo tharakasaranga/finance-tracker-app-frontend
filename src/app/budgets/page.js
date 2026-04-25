@@ -90,7 +90,9 @@ export default function BudgetsPage() {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = confirm("Are you sure you want to delete this budget?");
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this budget?",
+    );
 
     if (!confirmDelete) return;
 
