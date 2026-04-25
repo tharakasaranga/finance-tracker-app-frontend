@@ -3,57 +3,55 @@
 export default function TransactionList({ transactions, onEdit, onDelete }) {
   if (transactions.length === 0) {
     return (
-      <div className="bg-white rounded-xl border shadow-sm p-6 text-center">
-        <p className="text-gray-500">No transactions found.</p>
+      <div className="app-section rounded-[1.75rem] p-6 text-center">
+        <p className="text-slate-500">No transactions found.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl border shadow-sm overflow-x-auto">
+    <div className="app-section overflow-hidden rounded-[1.75rem]">
       <table className="w-full text-sm">
-        <thead className="bg-gray-50 border-b">
+        <thead className="bg-slate-50/90 border-b border-slate-200">
           <tr>
-            <th className="text-left px-5 py-3">Title</th>
-            <th className="text-left px-5 py-3">Category</th>
-            <th className="text-left px-5 py-3">Type</th>
-            <th className="text-left px-5 py-3">Date</th>
-            <th className="text-right px-5 py-3">Amount</th>
-            <th className="text-right px-5 py-3">Actions</th>
+            <th className="text-left px-5 py-4 font-semibold text-slate-600">Title</th>
+            <th className="text-left px-5 py-4 font-semibold text-slate-600">Category</th>
+            <th className="text-left px-5 py-4 font-semibold text-slate-600">Type</th>
+            <th className="text-left px-5 py-4 font-semibold text-slate-600">Date</th>
+            <th className="text-right px-5 py-4 font-semibold text-slate-600">Amount</th>
+            <th className="text-right px-5 py-4 font-semibold text-slate-600">Actions</th>
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="divide-y divide-slate-100">
           {transactions.map((item) => (
-            <tr key={item._id} className="border-b last:border-b-0">
+            <tr key={item._id} className="transition hover:bg-slate-50/70">
               <td className="px-5 py-4">
-                <p className="font-medium">{item.title}</p>
-                {item.note && (
-                  <p className="text-xs text-gray-500 mt-1">{item.note}</p>
-                )}
+                <p className="font-semibold text-slate-950">{item.title}</p>
+                {item.note && <p className="mt-1 text-xs text-slate-500">{item.note}</p>}
               </td>
 
-              <td className="px-5 py-4">{item.category}</td>
+              <td className="px-5 py-4 text-slate-600">{item.category}</td>
 
               <td className="px-5 py-4">
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-medium ${
                     item.type === "income"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                      ? "bg-emerald-50 text-emerald-700"
+                      : "bg-rose-50 text-rose-700"
                   }`}
                 >
                   {item.type}
                 </span>
               </td>
 
-              <td className="px-5 py-4">
+              <td className="px-5 py-4 text-slate-600">
                 {new Date(item.date).toLocaleDateString()}
               </td>
 
               <td
                 className={`px-5 py-4 text-right font-semibold ${
-                  item.type === "income" ? "text-green-600" : "text-red-600"
+                  item.type === "income" ? "text-emerald-600" : "text-rose-600"
                 }`}
               >
                 Rs. {Number(item.amount).toLocaleString()}
@@ -62,14 +60,14 @@ export default function TransactionList({ transactions, onEdit, onDelete }) {
               <td className="px-5 py-4 text-right">
                 <button
                   onClick={() => onEdit(item)}
-                  className="text-blue-600 hover:underline mr-4"
+                  className="mr-4 font-semibold text-sky-600 hover:text-sky-700"
                 >
                   Edit
                 </button>
 
                 <button
                   onClick={() => onDelete(item._id)}
-                  className="text-red-600 hover:underline"
+                  className="font-semibold text-rose-600 hover:text-rose-700"
                 >
                   Delete
                 </button>

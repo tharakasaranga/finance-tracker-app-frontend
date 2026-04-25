@@ -46,67 +46,108 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
-          <p className="text-gray-500 text-sm mt-2">
-            Start tracking your personal finances
-          </p>
-        </div>
+    <main className="auth-shell">
+      <div className="auth-card grid overflow-hidden rounded-[2rem] lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="bg-white p-6 md:p-10">
+          <div className="mx-auto flex min-h-full max-w-md flex-col justify-center">
+            <div className="mb-8 text-center">
+              <span className="section-kicker mx-auto">Create account</span>
+              <h1 className="mt-4 text-3xl font-black tracking-tight text-slate-950 md:text-4xl">
+                Start tracking smarter
+              </h1>
+              <p className="page-copy mx-auto mt-3 text-sm md:text-base">
+                Set up your workspace in seconds and get a cleaner view of your money.
+              </p>
+            </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border"
-        >
-          <label className="text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-3 mt-1 mb-4 text-sm bg-white"
-            required
-          />
+            <form onSubmit={handleSubmit} className="space-y-5 rounded-[1.75rem] border border-slate-200/80 bg-slate-50/90 p-6 shadow-lg shadow-slate-950/5 md:p-8">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-200/70"
+                  required
+                />
+              </div>
 
-          <label className="text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-3 mt-1 mb-4 text-sm bg-white"
-            required
-          />
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-200/70"
+                  required
+                />
+              </div>
 
-          <label className="text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Minimum 6 characters"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-4 py-3 mt-1 mb-5 text-sm bg-white"
-            required
-          />
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Minimum 6 characters"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-200/70"
+                  required
+                />
+              </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-slate-950 hover:bg-slate-800 text-white py-3 rounded-lg font-medium disabled:opacity-60"
-          >
-            {loading ? "Creating..." : "Register"}
-          </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-2xl bg-slate-950 py-3.5 text-sm font-semibold text-white shadow-lg shadow-slate-950/20 transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {loading ? "Creating..." : "Register"}
+              </button>
 
-          <p className="text-center text-sm text-gray-500 mt-5">
-            Already have an account?{" "}
-            <Link href="/login" className="text-slate-950 font-medium">
-              Login
-            </Link>
-          </p>
-        </form>
+              <p className="text-center text-sm text-slate-500">
+                Already have an account?{" "}
+                <Link href="/login" className="font-semibold text-slate-950 hover:text-slate-700">
+                  Login
+                </Link>
+              </p>
+            </form>
+          </div>
+        </section>
+
+        <aside className="auth-panel flex flex-col justify-between p-8 md:p-10">
+          <div>
+            <span className="profile-badge border border-white/10 bg-white/10 text-white/80">
+              Fast setup
+            </span>
+
+            <h2 className="mt-6 max-w-md text-4xl font-black tracking-tight md:text-5xl">
+              Build a better habit around your finances.
+            </h2>
+
+            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 md:text-base">
+              Track every expense, set practical budgets, and see your progress in a clear, calm interface from day one.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="metric-pill">
+              <p className="text-2xl font-black text-white">01</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/55">Create</p>
+            </div>
+            <div className="metric-pill">
+              <p className="text-2xl font-black text-white">02</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/55">Track</p>
+            </div>
+            <div className="metric-pill">
+              <p className="text-2xl font-black text-white">03</p>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/55">Improve</p>
+            </div>
+          </div>
+        </aside>
       </div>
     </main>
   );

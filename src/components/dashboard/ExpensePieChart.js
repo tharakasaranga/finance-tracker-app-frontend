@@ -12,11 +12,16 @@ const colors = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6", "#8b5cf6"
 
 export default function ExpensePieChart({ data }) {
   return (
-    <div className="bg-white rounded-xl border shadow-sm p-5">
-      <h3 className="text-lg font-semibold mb-4">Expense Distribution</h3>
+    <div className="app-section rounded-3xl p-5 md:p-6">
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div>
+          <p className="section-kicker">Insights</p>
+          <h3 className="mt-3 text-lg font-bold tracking-tight text-slate-950">Expense distribution</h3>
+        </div>
+      </div>
 
       {data.length === 0 ? (
-        <p className="text-gray-500 text-sm">No expense data available.</p>
+        <p className="text-sm text-slate-500">No expense data available.</p>
       ) : (
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
@@ -32,7 +37,13 @@ export default function ExpensePieChart({ data }) {
                   <Cell key={entry.name} fill={colors[index % colors.length]} />
                 ))}
               </Pie>
-              <Tooltip />
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: 14,
+                    border: "1px solid rgba(148, 163, 184, 0.2)",
+                    boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+                  }}
+                />
             </PieChart>
           </ResponsiveContainer>
         </div>

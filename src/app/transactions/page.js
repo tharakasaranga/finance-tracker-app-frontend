@@ -7,6 +7,7 @@ import TransactionFilters from "../../components/transactions/TransactionFilters
 import TransactionList from "../../components/transactions/TransactionList";
 import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
+import toast from "react-hot-toast";
 
 const emptyForm = {
   title: "",
@@ -85,8 +86,10 @@ export default function TransactionsPage() {
 
       if (editingId) {
         await api.put(`/transactions/${editingId}`, payload);
+        toast.success("Transaction updated successfully");
       } else {
         await api.post("/transactions", payload);
+        toast.success("Transaction created successfully");
       }
 
       setFormData(emptyForm);
@@ -119,9 +122,11 @@ export default function TransactionsPage() {
 
     try {
       await api.delete(`/transactions/${id}`);
+      toast.success("Transaction deleted successfully");
       getTransactions();
     } catch (error) {
       console.log("Transaction delete failed", error);
+      toast.error("Transaction delete failed");
     }
   };
 
@@ -136,12 +141,11 @@ export default function TransactionsPage() {
 
   return (
     <AppLayout title="Transactions">
-      <div className="mb-5">
-        <h3 className="text-xl font-semibold text-gray-900">
-          Income and Expense Records
-        </h3>
-        <p className="text-sm text-gray-500">
-          Add, edit, delete and filter your financial transactions.
+      <div className="page-heading mb-6">
+        <span className="section-kicker">Records</span>
+        <h3 className="page-title text-2xl md:text-3xl">Income and expense records</h3>
+        <p className="page-copy">
+          Add, edit, delete, and filter transactions with a more polished workspace.
         </p>
       </div>
 

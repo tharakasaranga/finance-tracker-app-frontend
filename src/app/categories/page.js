@@ -42,9 +42,10 @@ export default function CategoriesPage() {
     try {
       if (editingId) {
         await api.put(`/categories/${editingId}`, formData);
-        toast.success(editingId ? "Category updated" : "Category added");
+        toast.success("Category updated successfully");
       } else {
         await api.post("/categories", formData);
+        toast.success("Category created successfully");
       }
 
       setFormData({
@@ -78,11 +79,11 @@ export default function CategoriesPage() {
 
     try {
       await api.delete(`/categories/${id}`);
-      toast.success("Category deleted");
+      toast.success("Category deleted successfully");
       getCategories();
     } catch (error) {
       console.log("Category delete failed", error);
-      toast.error("Category delete failed");
+      toast.error("Category delete failed. Please try again.");
     }
   };
 
@@ -96,12 +97,11 @@ export default function CategoriesPage() {
 
   return (
     <AppLayout title="Categories">
-      <div className="mb-5">
-        <h3 className="text-xl font-semibold text-gray-900">
-          Manage Categories
-        </h3>
-        <p className="text-sm text-gray-500">
-          Create income and expense categories for your transactions.
+      <div className="page-heading mb-6">
+        <span className="section-kicker">Organization</span>
+        <h3 className="page-title text-2xl md:text-3xl">Manage categories</h3>
+        <p className="page-copy">
+          Create income and expense categories for your transactions with a cleaner presentation.
         </p>
       </div>
 

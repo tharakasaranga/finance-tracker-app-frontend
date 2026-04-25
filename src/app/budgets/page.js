@@ -64,9 +64,10 @@ export default function BudgetsPage() {
 
       if (editingId) {
         await api.put(`/budgets/${editingId}`, payload);
-        toast.success(editingId ? "Budget updated" : "Budget created");
+        toast.success("Budget updated successfully");
       } else {
         await api.post("/budgets", payload);
+        toast.success("Budget created successfully");
       }
 
       setFormData(emptyForm);
@@ -98,11 +99,11 @@ export default function BudgetsPage() {
 
     try {
       await api.delete(`/budgets/${id}`);
-      toast.success("Budget deleted");
+      toast.success("Budget deleted successfully");
       getBudgets();
     } catch (error) {
       console.log("Budget delete failed", error);
-      toast.error("Budget delete failed");
+      toast.error("Budget delete failed. Please try again.");
     }
   };
 
@@ -113,12 +114,11 @@ export default function BudgetsPage() {
 
   return (
     <AppLayout title="Budgets">
-      <div className="mb-5">
-        <h3 className="text-xl font-semibold text-gray-900">
-          Monthly Budget Management
-        </h3>
-        <p className="text-sm text-gray-500">
-          Set budgets for expense categories and track your spending progress.
+      <div className="page-heading mb-6">
+        <span className="section-kicker">Planning</span>
+        <h3 className="page-title text-2xl md:text-3xl">Monthly budget management</h3>
+        <p className="page-copy">
+          Set budgets for expense categories and track your spending progress with a more refined interface.
         </p>
       </div>
 

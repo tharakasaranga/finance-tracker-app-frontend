@@ -44,23 +44,22 @@ export default function DashboardPage() {
 
   return (
     <AppLayout title="Dashboard">
-      <div className="mb-5">
-        <h3 className="text-xl font-semibold text-gray-900">
-          Financial Overview
-        </h3>
-        <p className="text-sm text-gray-500">
-          View your income, expenses, budget usage and recent activity.
+      <div className="page-heading mb-6">
+        <span className="section-kicker">Overview</span>
+        <h3 className="page-title text-2xl md:text-3xl">Financial overview</h3>
+        <p className="page-copy">
+          View your income, expenses, budget usage, and recent activity in a cleaner, more focused layout.
         </p>
       </div>
 
       <SummaryCards summary={dashboardData.summary} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 mb-6">
         <ExpensePieChart data={dashboardData.expenseChart} />
         <MonthlyBarChart data={dashboardData.monthlyChart} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         <BudgetProgress data={dashboardData.budgetChart} />
         <RecentTransactions transactions={dashboardData.recentTransactions} />
       </div>
