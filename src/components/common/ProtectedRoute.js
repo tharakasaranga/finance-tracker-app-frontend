@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
+import Loader from "./Loader";
 
 export default function ProtectedRoute({ children }) {
   const { currentUser, loading } = useAuth();
@@ -15,7 +16,7 @@ export default function ProtectedRoute({ children }) {
   }, [currentUser, loading, router]);
 
   if (loading) {
-    return <p className="p-6">Loading...</p>;
+    return <Loader text="Checking your session..." />;
   }
 
   if (!currentUser) {

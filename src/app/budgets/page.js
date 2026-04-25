@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import AppLayout from "../../components/common/AppLayout";
 import BudgetForm from "../../components/budgets/BudgetForm";
 import BudgetList from "../../components/budgets/BudgetList";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
+import toast from "react-hot-toast";
 
 const today = new Date();
 
@@ -16,6 +18,7 @@ const emptyForm = {
 };
 
 export default function BudgetsPage() {
+  const { currentUser, loading } = useAuth();
   const [budgets, setBudgets] = useState([]);
   const [categories, setCategories] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -40,9 +43,13 @@ export default function BudgetsPage() {
   };
 
   useEffect(() => {
+    if (loading || !currentUser) {
+      return;
+    }
+
     getCategories();
     getBudgets();
-  }, []);
+  }, [currentUser, loading]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +64,7 @@ export default function BudgetsPage() {
 
       if (editingId) {
         await api.put(`/budgets/${editingId}`, payload);
+        toast.success(editingId ? "Budget updated" : "Budget created");
       } else {
         await api.post("/budgets", payload);
       }
@@ -66,6 +74,7 @@ export default function BudgetsPage() {
       getBudgets();
     } catch (error) {
       console.log("Budget save failed", error);
+      toast.error("Budget save failed");
     }
   };
 
@@ -87,9 +96,11 @@ export default function BudgetsPage() {
 
     try {
       await api.delete(`/budgets/${id}`);
+      toast.success("Budget deleted");
       getBudgets();
     } catch (error) {
       console.log("Budget delete failed", error);
+      toast.error("Budget delete failed");
     }
   };
 

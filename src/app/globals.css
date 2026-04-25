@@ -15,6 +15,17 @@ textarea {
   outline: none;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+}
+
 button {
   cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
 }

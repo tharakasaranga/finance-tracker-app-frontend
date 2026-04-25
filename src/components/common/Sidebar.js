@@ -15,7 +15,8 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 min-h-screen bg-slate-950 text-white px-5 py-6 hidden md:block">
-      <h1 className="text-2xl font-bold mb-8">Finance App</h1>
+      <h1 className="text-2xl font-bold mb-1">Finance App</h1>
+      <p className="text-xs text-slate-400 mb-8">Budget Tracking System</p>
 
       <nav className="space-y-2">
         {menuItems.map((item) => {
@@ -39,3 +40,5 @@ export default function Sidebar() {
     </aside>
   );
 }
+
+export { menuItems };

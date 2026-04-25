@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 
 export default function RegisterPage() {
@@ -14,7 +16,7 @@ export default function RegisterPage() {
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -25,63 +27,87 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+
+    if (formData.password.length < 6) {
+      toast.error("Password should be at least 6 characters");
+      return;
+    }
 
     try {
+      setLoading(true);
       await registerUser(formData.name, formData.email, formData.password);
+      toast.success("Account created successfully");
       router.push("/dashboard");
     } catch (err) {
-      setError("Registration failed. Please try again.");
+      toast.error("Registration failed. Try another email.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
-      >
-        <h1 className="text-2xl font-bold mb-6">Create Account</h1>
+    <main className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-900">Create Account</h1>
+          <p className="text-gray-500 text-sm mt-2">
+            Start tracking your personal finances
+          </p>
+        </div>
 
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full border p-3 rounded mb-4"
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full border p-3 rounded mb-4"
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full border p-3 rounded mb-4"
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-3 rounded"
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border"
         >
-          Register
-        </button>
-      </form>
-    </div>
+          <label className="text-sm font-medium text-gray-700">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-4 py-3 mt-1 mb-4 text-sm bg-white"
+            required
+          />
+
+          <label className="text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-4 py-3 mt-1 mb-4 text-sm bg-white"
+            required
+          />
+
+          <label className="text-sm font-medium text-gray-700">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Minimum 6 characters"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-4 py-3 mt-1 mb-5 text-sm bg-white"
+            required
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-slate-950 hover:bg-slate-800 text-white py-3 rounded-lg font-medium disabled:opacity-60"
+          >
+            {loading ? "Creating..." : "Register"}
+          </button>
+
+          <p className="text-center text-sm text-gray-500 mt-5">
+            Already have an account?{" "}
+            <Link href="/login" className="text-slate-950 font-medium">
+              Login
+            </Link>
+          </p>
+        </form>
+      </div>
+    </main>
   );
 }

@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import AppLayout from "../../components/common/AppLayout";
 import CategoryForm from "../../components/categories/CategoryForm";
 import CategoryList from "../../components/categories/CategoryList";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
 
+import toast from "react-hot-toast";
+
 export default function CategoriesPage() {
+  const { currentUser, loading } = useAuth();
   const [categories, setCategories] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
@@ -25,8 +29,12 @@ export default function CategoriesPage() {
   };
 
   useEffect(() => {
+    if (loading || !currentUser) {
+      return;
+    }
+
     getCategories();
-  }, []);
+  }, [currentUser, loading]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +42,7 @@ export default function CategoriesPage() {
     try {
       if (editingId) {
         await api.put(`/categories/${editingId}`, formData);
+        toast.success(editingId ? "Category updated" : "Category added");
       } else {
         await api.post("/categories", formData);
       }
@@ -47,6 +56,7 @@ export default function CategoriesPage() {
       getCategories();
     } catch (error) {
       console.log("Category save failed", error);
+      toast.error("Category save failed");
     }
   };
 
@@ -66,9 +76,11 @@ export default function CategoriesPage() {
 
     try {
       await api.delete(`/categories/${id}`);
+      toast.success("Category deleted");
       getCategories();
     } catch (error) {
       console.log("Category delete failed", error);
+      toast.error("Category delete failed");
     }
   };
 

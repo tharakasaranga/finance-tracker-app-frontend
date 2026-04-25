@@ -10,7 +10,7 @@ export default function TransactionList({ transactions, onEdit, onDelete }) {
   }
 
   return (
-    <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl border shadow-sm overflow-x-auto">
       <table className="w-full text-sm">
         <thead className="bg-gray-50 border-b">
           <tr>
