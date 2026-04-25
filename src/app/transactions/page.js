@@ -5,6 +5,7 @@ import AppLayout from "../../components/common/AppLayout";
 import TransactionForm from "../../components/transactions/TransactionForm";
 import TransactionFilters from "../../components/transactions/TransactionFilters";
 import TransactionList from "../../components/transactions/TransactionList";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
 
 const emptyForm = {
@@ -24,6 +25,7 @@ const emptyFilters = {
 };
 
 export default function TransactionsPage() {
+  const { currentUser, loading } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -57,12 +59,20 @@ export default function TransactionsPage() {
   };
 
   useEffect(() => {
+    if (loading || !currentUser) {
+      return;
+    }
+
     getCategories();
-  }, []);
+  }, [currentUser, loading]);
 
   useEffect(() => {
+    if (loading || !currentUser) {
+      return;
+    }
+
     getTransactions();
-  }, [filters]);
+  }, [currentUser, loading, filters]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

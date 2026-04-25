@@ -7,9 +7,11 @@ import ExpensePieChart from "../../components/dashboard/ExpensePieChart";
 import MonthlyBarChart from "../../components/dashboard/MonthlyBarChart";
 import BudgetProgress from "../../components/dashboard/BudgetProgress";
 import RecentTransactions from "../../components/dashboard/RecentTransactions";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../lib/api";
 
 export default function DashboardPage() {
+  const { currentUser, loading } = useAuth();
   const [dashboardData, setDashboardData] = useState({
     summary: {
       totalIncome: 0,
@@ -33,8 +35,12 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
+    if (loading || !currentUser) {
+      return;
+    }
+
     getDashboardData();
-  }, []);
+  }, [currentUser, loading]);
 
   return (
     <AppLayout title="Dashboard">
