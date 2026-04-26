@@ -65,14 +65,8 @@ export default function Sidebar({ open = false, onClose }) {
 
   return (
     <>
-      <aside className="hidden md:flex md:w-72 min-h-screen flex-col border-r border-slate-200/80 bg-slate-950/95 text-white px-5 py-6 sticky top-0 shadow-[0_24px_60px_rgba(15,23,42,0.22)]">
-        {sidebarContent}
-      </aside>
-
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-[19rem] max-w-[86vw] flex-col border-r border-slate-200/80 bg-slate-950/97 text-white px-5 py-6 shadow-[0_24px_60px_rgba(15,23,42,0.28)] transition-transform duration-300 md:hidden ${
-          open ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className="fixed inset-y-0 left-0 z-50 flex w-76 max-w-[86vw] flex-col border-r border-slate-200/80 bg-slate-950/97 text-white px-5 py-6 shadow-[0_24px_60px_rgba(15,23,42,0.28)] md:sticky md:top-0 md:z-auto md:w-72 md:max-w-none md:min-h-screen"
         aria-hidden={!open}
       >
         <div className="mb-6 flex items-center justify-between">

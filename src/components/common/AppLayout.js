@@ -27,7 +27,9 @@ export default function AppLayout({ children, title }) {
           />
         )}
 
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        {sidebarOpen && (
+          <Sidebar onClose={() => setSidebarOpen(false)} />
+        )}
 
         <main className="flex-1 min-w-0 px-4 py-4 md:px-6 md:py-6">
           <div className="app-shell min-h-[calc(100vh-2rem)] rounded-4xl overflow-hidden">
