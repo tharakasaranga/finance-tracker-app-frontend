@@ -1,6 +1,7 @@
 import "./globals.css";
 import { AuthProvider } from "../context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import RouteShell from "../components/common/RouteShell";
 
 export const metadata = {
   title: {
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="min-h-screen antialiased text-slate-900">
         <AuthProvider>
-          {children}
+          <RouteShell>{children}</RouteShell>
           <Toaster
             position="top-right"
             toastOptions={{

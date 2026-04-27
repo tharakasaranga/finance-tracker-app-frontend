@@ -19,8 +19,12 @@ const monthNames = [
 export default function BudgetList({ budgets, onEdit, onDelete }) {
   if (budgets.length === 0) {
     return (
-      <div className="app-section rounded-[1.75rem] p-6 text-center">
-        <p className="text-slate-500">No budgets created yet.</p>
+      <div className="empty-state app-section rounded-[1.75rem]">
+        <strong>No budgets created yet.</strong>
+        <p>
+          Set up a budget to see progress bars, warnings, and remaining balance
+          totals.
+        </p>
       </div>
     );
   }
@@ -33,11 +37,13 @@ export default function BudgetList({ budgets, onEdit, onDelete }) {
         return (
           <div
             key={budget._id}
-            className="app-section rounded-[1.75rem] p-5 md:p-6"
+            className="reveal-card app-section rounded-[1.75rem] p-5 md:p-6"
           >
-            <div className="flex items-start justify-between mb-4">
+            <div className="panel-heading mb-4">
               <div>
-                <h3 className="text-lg font-bold tracking-tight text-slate-950">{budget.category}</h3>
+                <h3 className="text-lg font-bold tracking-tight text-slate-950">
+                  {budget.category}
+                </h3>
                 <p className="text-sm text-slate-500">
                   {monthNames[budget.month]} {budget.year}
                 </p>
@@ -55,7 +61,7 @@ export default function BudgetList({ budgets, onEdit, onDelete }) {
             </div>
 
             <div className="mb-3">
-              <div className="flex justify-between text-sm mb-2">
+              <div className="mb-2 flex justify-between text-sm">
                 <span className="text-slate-500">Spent</span>
                 <span className="font-medium">
                   Rs. {Number(budget.spent).toLocaleString()} / Rs.{" "}
@@ -63,21 +69,19 @@ export default function BudgetList({ budgets, onEdit, onDelete }) {
                 </span>
               </div>
 
-              <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100">
                 <div
-                  className={`h-full ${
-                    budget.isExceeded ? "bg-rose-500" : "bg-emerald-500"
-                  }`}
+                  className={`h-full ${budget.isExceeded ? "bg-rose-500" : "bg-emerald-500"}`}
                   style={{ width: `${progressWidth}%` }}
-                ></div>
+                />
               </div>
 
-              <p className="text-sm text-slate-500 mt-2">
+              <p className="mt-2 text-sm text-slate-500">
                 {budget.percentage}% used
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="mb-4 grid grid-cols-2 gap-3">
               <div className="rounded-2xl bg-slate-50 p-3">
                 <p className="text-xs text-slate-500">Budget</p>
                 <p className="font-semibold">
@@ -88,9 +92,7 @@ export default function BudgetList({ budgets, onEdit, onDelete }) {
               <div className="rounded-2xl bg-slate-50 p-3">
                 <p className="text-xs text-slate-500">Remaining</p>
                 <p
-                  className={`font-semibold ${
-                    budget.remaining < 0 ? "text-rose-600" : "text-emerald-600"
-                  }`}
+                  className={`font-semibold ${budget.remaining < 0 ? "text-rose-600" : "text-emerald-600"}`}
                 >
                   Rs. {Number(budget.remaining).toLocaleString()}
                 </p>
@@ -100,14 +102,14 @@ export default function BudgetList({ budgets, onEdit, onDelete }) {
             <div className="flex justify-end gap-4">
               <button
                 onClick={() => onEdit(budget)}
-                className="text-sm font-semibold text-sky-600 hover:text-sky-700"
+                className="text-sm font-semibold text-sky-600 transition hover:text-sky-700"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => onDelete(budget._id)}
-                className="text-sm font-semibold text-rose-600 hover:text-rose-700"
+                className="text-sm font-semibold text-rose-600 transition hover:text-rose-700"
               >
                 Delete
               </button>

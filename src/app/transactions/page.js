@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AppLayout from "../../components/common/AppLayout";
 import TransactionForm from "../../components/transactions/TransactionForm";
 import TransactionFilters from "../../components/transactions/TransactionFilters";
 import TransactionList from "../../components/transactions/TransactionList";
@@ -140,7 +139,7 @@ export default function TransactionsPage() {
   };
 
   return (
-    <AppLayout title="Transactions">
+    <>
       <div className="page-heading mb-6">
         <span className="section-kicker">Records</span>
         <h3 className="page-title text-2xl md:text-3xl">Income and expense records</h3>
@@ -170,6 +169,6 @@ export default function TransactionsPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-    </AppLayout>
+    </>
   );
 }
