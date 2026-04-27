@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AppLayout from "../../components/common/AppLayout";
 import BudgetForm from "../../components/budgets/BudgetForm";
 import BudgetList from "../../components/budgets/BudgetList";
 import { useAuth } from "../../context/AuthContext";
@@ -113,7 +112,7 @@ export default function BudgetsPage() {
   };
 
   return (
-    <AppLayout title="Budgets">
+    <>
       <div className="page-heading mb-6">
         <span className="section-kicker">Planning</span>
         <h3 className="page-title text-2xl md:text-3xl">Monthly budget management</h3>
@@ -136,6 +135,6 @@ export default function BudgetsPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-    </AppLayout>
+    </>
   );
 }

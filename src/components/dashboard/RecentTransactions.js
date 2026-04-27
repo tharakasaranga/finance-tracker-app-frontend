@@ -2,20 +2,24 @@
 
 export default function RecentTransactions({ transactions }) {
   return (
-    <div className="app-section rounded-[1.5rem] p-5 md:p-6">
-      <div className="mb-4">
+    <div className="chart-panel app-section rounded-[1.75rem] p-5 md:p-6">
+      <div className="relative z-10 mb-4">
         <p className="section-kicker">Activity</p>
-        <h3 className="mt-3 text-lg font-bold tracking-tight text-slate-950">Recent transactions</h3>
+        <h3 className="mt-3 text-lg font-bold tracking-tight text-slate-950">
+          Recent transactions
+        </h3>
       </div>
 
       {transactions.length === 0 ? (
-        <p className="text-sm text-slate-500">No recent transactions.</p>
+        <p className="relative z-10 text-sm text-slate-500">
+          No recent transactions.
+        </p>
       ) : (
-        <div className="space-y-3">
+        <div className="relative z-10 space-y-3">
           {transactions.map((item) => (
             <div
               key={item._id}
-              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm last:border-b"
+              className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/95 px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div>
                 <p className="font-semibold text-slate-950">{item.title}</p>

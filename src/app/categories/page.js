@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AppLayout from "../../components/common/AppLayout";
 import CategoryForm from "../../components/categories/CategoryForm";
 import CategoryList from "../../components/categories/CategoryList";
 import { useAuth } from "../../context/AuthContext";
@@ -96,7 +95,7 @@ export default function CategoriesPage() {
   };
 
   return (
-    <AppLayout title="Categories">
+    <>
       <div className="page-heading mb-6">
         <span className="section-kicker">Organization</span>
         <h3 className="page-title text-2xl md:text-3xl">Manage categories</h3>
@@ -118,6 +117,6 @@ export default function CategoriesPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-    </AppLayout>
+    </>
   );
 }
