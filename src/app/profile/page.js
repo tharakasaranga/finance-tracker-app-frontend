@@ -1,6 +1,5 @@
 "use client";
 
-import AppLayout from "../../components/common/AppLayout";
 import { useAuth } from "../../context/AuthContext";
 
 export default function page() {
@@ -15,7 +14,7 @@ export default function page() {
     : "Recently";
 
   return (
-    <AppLayout title="Profile">
+    <>
       <div className="page-heading mb-6">
         <span className="section-kicker">Account overview</span>
         <h3 className="page-title text-2xl md:text-3xl">Profile and account details</h3>
@@ -27,7 +26,7 @@ export default function page() {
       <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
         <section className="app-section rounded-[1.75rem] p-6 md:p-8">
           <div className="flex items-center gap-4">
-            <div className="flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-slate-950 text-2xl font-black text-white shadow-lg shadow-slate-950/20">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-950 text-2xl font-black text-white shadow-lg shadow-slate-950/20">
               {(currentUser?.displayName || currentUser?.email || "P").slice(0, 1).toUpperCase()}
             </div>
 
@@ -91,6 +90,6 @@ export default function page() {
           </div>
         </section>
       </div>
-    </AppLayout>
+    </>
   );
 }

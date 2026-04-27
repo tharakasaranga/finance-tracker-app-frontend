@@ -13,33 +13,33 @@ const menuItems = [
 export default function Sidebar({ open = false, onClose }) {
   const pathname = usePathname();
 
-  const handleLinkClick = () => {
-    if (onClose) {
-      onClose();
-    }
-  };
-
   const sidebarContent = (
     <>
-      <div className="mb-10 rounded-3xl border border-white/10 bg-white/5 p-4">
+      <div className="mb-10 rounded-[1.75rem] border border-white/10 bg-white/5 p-4 shadow-inner shadow-black/10">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-slate-950 font-black shadow-lg shadow-black/20">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-br from-white to-slate-200 font-black text-slate-950 shadow-lg shadow-black/20">
             F
           </div>
 
           <div>
-            <h1 className="text-2xl font-extrabold tracking-tight">Finance App</h1>
+            <h1 className="text-2xl font-extrabold tracking-tight">
+              Finance App
+            </h1>
             <p className="text-xs text-slate-400">Budget Tracking System</p>
           </div>
         </div>
 
-        <div className="mt-4 rounded-2xl bg-white/8 border border-white/10 px-4 py-3">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Smart dashboard</p>
-          <p className="mt-1 text-sm text-slate-200">Track income, spending, and budgets with one clear view.</p>
+        <div className="mt-4 rounded-2xl border border-white/10 bg-white/8 px-4 py-3">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">
+            Smart dashboard
+          </p>
+          <p className="mt-1 text-sm text-slate-200">
+            Track income, spending, and budgets with one clear view.
+          </p>
         </div>
       </div>
 
-      <nav className="space-y-2 flex-1">
+      <nav className="flex-1 space-y-2">
         {menuItems.map((item) => {
           const active = pathname === item.path;
 
@@ -47,15 +47,16 @@ export default function Sidebar({ open = false, onClose }) {
             <Link
               key={item.path}
               href={item.path}
-              onClick={handleLinkClick}
-              className={`flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition ${
+              className={`flex items-center justify-between rounded-2xl border px-4 py-3 text-sm font-medium transition ${
                 active
-                  ? "bg-white text-slate-950 shadow-lg shadow-black/10"
-                  : "text-slate-300 hover:bg-white/10 hover:text-white"
+                  ? "border-white/20 bg-white text-slate-950 shadow-lg shadow-black/10"
+                  : "border-white/8 bg-white/0 text-slate-300 hover:border-white/15 hover:bg-white/10 hover:text-white"
               }`}
             >
               <span>{item.name}</span>
-              <span className={`h-2 w-2 rounded-full ${active ? "bg-emerald-500" : "bg-slate-600"}`} />
+              <span
+                className={`h-2 w-2 rounded-full ${active ? "bg-emerald-500" : "bg-slate-600"}`}
+              />
             </Link>
           );
         })}
@@ -66,15 +67,17 @@ export default function Sidebar({ open = false, onClose }) {
   return (
     <>
       <aside
-        className="fixed inset-y-0 left-0 z-50 flex w-76 max-w-[86vw] flex-col border-r border-slate-200/80 bg-slate-950/97 text-white px-5 py-6 shadow-[0_24px_60px_rgba(15,23,42,0.28)] md:sticky md:top-0 md:z-auto md:w-72 md:max-w-none md:min-h-screen"
+        className="fixed inset-y-0 left-0 z-50 flex w-76 max-w-[86vw] flex-col border-r border-slate-200/80 bg-linear-to-b from-slate-950 via-slate-950 to-slate-900 px-5 py-6 text-white shadow-[0_24px_60px_rgba(15,23,42,0.28)] md:sticky md:top-0 md:z-auto md:min-h-screen md:w-72 md:max-w-none"
         aria-hidden={!open}
       >
         <div className="mb-6 flex items-center justify-between">
-          <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Navigation</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
+            Navigation
+          </p>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/15"
+            className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-white/15"
           >
             Close
           </button>
